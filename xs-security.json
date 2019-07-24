@@ -1,0 +1,32 @@
+{
+  "xsappname": "AuthTest",
+  "tenant-mode": "dedicated",
+  "description": "Security profile of called application",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Display",
+      "description": "Display Users"
+    },
+    {
+      "name": "$XSAPPNAME.Update",
+      "description": "Update Users"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "Viewer",
+      "description": "View Users",
+      "scope-references": [ 
+        "$XSAPPNAME.Display" 
+      ]
+    },
+    {
+      "name": "Manager",
+      "description": "Maintain Users",
+      "scope-references": [
+        "$XSAPPNAME.Display",
+        "$XSAPPNAME.Update"
+      ]
+    }
+  ]
+}

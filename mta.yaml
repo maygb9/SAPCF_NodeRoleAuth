@@ -1,0 +1,40 @@
+ID: AuthTest
+_schema-version: '2.1'
+version: 0.0.1
+modules:
+  - name: nodejsmodule
+    type: nodejs
+    path: nodejsmodule
+    provides:
+      - name: nodejsmodule_api
+        properties:
+          url: '${default-url}'
+  - name: ui5module
+    type: html5
+    path: ui5module
+    parameters:
+      disk-quota: 256M
+      memory: 256M
+    build-parameters:
+      builder: grunt
+    requires:
+      - name: dest_AuthTest
+      - name: nodejsmodule_api
+        properties:
+          name: nodejsmodule_api
+          url: '~{url}'
+          forwardAuthToken: true
+        group: destinations
+      - name: uaa_authtest
+resources:
+  - name: dest_AuthTest
+    parameters:
+      service-plan: lite
+      service: destination
+    type: org.cloudfoundry.managed-service
+  - name: uaa_authtest
+    parameters:
+      service-name: myuaa
+      service: xsuaa
+      service-plan: application
+    type: org.cloudfoundry.existing-service

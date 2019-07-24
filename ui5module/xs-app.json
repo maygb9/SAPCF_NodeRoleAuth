@@ -1,0 +1,14 @@
+{
+  "welcomeFile": "/ui5module/index.html",
+  "authenticationMethod": "route",
+  "logout": {
+    "logoutEndpoint": "/do/logout"
+  },
+  "routes": [
+    {
+      "source": "^/ui5module/(.*)$",
+      "target": "$1",
+      "destination": "nodejsmodule_api"
+    }
+  ]
+}
